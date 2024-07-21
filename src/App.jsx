@@ -3,13 +3,15 @@ import AddTodo from './components/AddTodo.jsx'
 import TodoItems from './components/TodoItems.jsx'
 import WelcomeMessage from './components/WelcomeMessage.jsx'
 import { useState } from 'react'
-// import './App.css'
+
 function App() {
   const [todoItems, setTodoItems] = useState([]);
   const handleNewItem = (itemName, itemDueDate) => {
     console.log(`new item added ${itemName} due date ${itemDueDate}`);
-    let newTodoItems = [...todoItems, { todoName: itemName, todoDate: itemDueDate }];
-    setTodoItems(newTodoItems);
+    setTodoItems((currValue)=>{
+      const newTodoItems = [...currValue, { todoName: itemName, todoDate: itemDueDate }];
+      return newTodoItems;
+    });
   }
 
   const handleDeleteItem = (index) => {
@@ -20,7 +22,7 @@ function App() {
   }
 
   return (
-    <>
+    <>k
       <div className="BigContainer bg-red-800 text-white min-h-screen p-9">
         <center className="todo-container" >
           <AppName />
@@ -32,5 +34,4 @@ function App() {
     </>
   )
 }
-
 export default App

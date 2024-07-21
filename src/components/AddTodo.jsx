@@ -1,32 +1,28 @@
 // import styles from "./AddTodo.module.css";
-import { useState } from 'react';
+import {useRef } from 'react';
 import { IoIosAddCircle } from "react-icons/io";
 function AddTodo({onNewItem}) {
-    const[todoName, setTodoName] = useState("");
-    const[todoDate, setTodoDate] = useState("");
-    const handleNameChange = (e) => {
-        setTodoName(e.target.value);
-        // console.log(todoName);
-    }
-    const handleDateChange = (e) => {
-        setTodoDate(e.target.value);
-        // console.log(todoDate);
-    }
+    let todoNameElement = useRef();
+    let todoDateElement = useRef();
     const handleAddButtonClicked=(event)=>{
         event.preventDefault();
-        onNewItem(todoName,todoDate);
-        setTodoDate("");
-        setTodoName("");
+        let todoName = todoNameElement.current.value;
+        let dueDate=todoDateElement.current.value;
+        console.log("jai shree ram",todoName,dueDate);
+        onNewItem(todoName,dueDate);
+        todoNameElement.current.value=null;
+        todoDateElement.current.value=null;
+        // noOfUpdates.current = 0; // Reset the count after submitting
     }
     return (
         <form
         onSubmit={handleAddButtonClicked}
         className="grid grid-cols-3 gap-4 mb-4 bg-slate-700 p-2 rounded-lg">
             <div className="text-black flex items-center justify-center">
-                <input type="text" className="p-1 rounded-md" placeholder="Add Task" value={todoName} onChange={handleNameChange} required />
+                <input type="text" ref={todoNameElement} className="p-1 rounded-md" placeholder="Add Task" required />
             </div>
             <div className="text-black flex items-center justify-center">
-                <input type="date" className="p-1 rounded-md" value={todoDate} onChange={handleDateChange} required />
+                <input type="date" ref={todoDateElement} className="p-1 rounded-md" required />
             </div>
             <div className="flex items-center justify-center">
                 <button
