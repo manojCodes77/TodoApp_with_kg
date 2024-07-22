@@ -1,6 +1,9 @@
 import {useRef } from 'react';
+import { useContext } from 'react';
+import { TodoItemsContext } from '../store/todo-items-store';
 import { IoIosAddCircle } from "react-icons/io";
-function AddTodo({onNewItem}) {
+function AddTodo() {
+    const {handleNewItem} = useContext(TodoItemsContext);
     let todoNameElement = useRef();
     let todoDateElement = useRef();
     const handleAddButtonClicked=(event)=>{
@@ -8,7 +11,7 @@ function AddTodo({onNewItem}) {
         let todoName = todoNameElement.current.value;
         let dueDate=todoDateElement.current.value;
         console.log("jai shree ram",todoName,dueDate);
-        onNewItem(todoName,dueDate);
+        handleNewItem(todoName,dueDate);
         todoNameElement.current.value=null;
         todoDateElement.current.value=null;
     }

@@ -1,5 +1,8 @@
 import { MdDelete } from "react-icons/md";
-function TodoItem1({id,todoName, todoDate,onDeleteItem}) {
+import { useContext } from "react";
+import { TodoItemsContext } from "../store/todo-items-store";
+function TodoItem1({id,todoName, todoDate}) {
+    const{handleDeleteItem}=useContext(TodoItemsContext);
     return (
         <div className="grid grid-cols-3 gap-4 py-2 px-1 bg-slate-600 my-2 rounded-2xl">
             <div className="flex items-center justify-center">
@@ -10,7 +13,7 @@ function TodoItem1({id,todoName, todoDate,onDeleteItem}) {
             </div>
             <div className="flex items-center justify-center">
                 <button type="button"
-                onClick={()=>onDeleteItem(id)}
+                onClick={()=>handleDeleteItem(id)}
                 className="py-1 px-1 rounded-md bg-rose-500 hover:bg-rose-700">
                     <MdDelete />
                 </button>
