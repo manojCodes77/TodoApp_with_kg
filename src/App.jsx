@@ -18,11 +18,10 @@ function App() {
     console.log(`item deleted at index ${index}`);
     let newTodoItems = todoItems.filter((item, i) => i !== index);
     setTodoItems(newTodoItems);
-    // console.log(event);
   }
 
   return (
-    <>k
+    <>
       <div className="BigContainer bg-red-800 text-white min-h-screen p-9">
         <center className="todo-container" >
           <AppName />

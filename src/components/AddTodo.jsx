@@ -1,4 +1,3 @@
-// import styles from "./AddTodo.module.css";
 import {useRef } from 'react';
 import { IoIosAddCircle } from "react-icons/io";
 function AddTodo({onNewItem}) {
@@ -12,7 +11,6 @@ function AddTodo({onNewItem}) {
         onNewItem(todoName,dueDate);
         todoNameElement.current.value=null;
         todoDateElement.current.value=null;
-        // noOfUpdates.current = 0; // Reset the count after submitting
     }
     return (
         <form
@@ -26,7 +24,6 @@ function AddTodo({onNewItem}) {
             </div>
             <div className="flex items-center justify-center">
                 <button
-                // onClick={handleAddButtonClicked}
                  className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                     <IoIosAddCircle />
                 </button>
