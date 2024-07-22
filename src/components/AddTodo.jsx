@@ -9,9 +9,9 @@ function AddTodo() {
     const handleAddButtonClicked=(event)=>{
         event.preventDefault();
         let todoName = todoNameElement.current.value;
-        let dueDate=todoDateElement.current.value;
-        console.log("jai shree ram",todoName,dueDate);
-        handleNewItem(todoName,dueDate);
+        let todoDate=todoDateElement.current.value;
+        console.log("jai shree ram",todoName,todoDate);
+        handleNewItem(todoName,todoDate);
         todoNameElement.current.value=null;
         todoDateElement.current.value=null;
     }

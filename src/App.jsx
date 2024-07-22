@@ -2,23 +2,29 @@ import AppName from './components/AddName.jsx'
 import AddTodo from './components/AddTodo.jsx'
 import TodoItems from './components/TodoItems.jsx'
 import WelcomeMessage from './components/WelcomeMessage.jsx'
-import {TodoItemsContext} from './store/todo-items-store.jsx'
-import { useState } from 'react'
+import { TodoItemsContext } from './store/todo-items-store.jsx'
+import { useReducer, useState } from 'react'
+
+const reducer = (currTodoItems, action) => {
+  let newTodoItems = currTodoItems;
+  if (action.type === 'ADD') {
+    newTodoItems= [...currTodoItems, action.payload];
+  } else if (action.type === 'DELETE') {
+    newTodoItems= currTodoItems.filter((item, i) => i !== action.payload);
+  }
+  return newTodoItems;
+}
 
 function App() {
-  const [todoItems, setTodoItems] = useState([]);
+  const [todoItems, dispatch] = useReducer(reducer, []);
   const handleNewItem = (itemName, itemDueDate) => {
     console.log(`new item added ${itemName} due date ${itemDueDate}`);
-    setTodoItems((currValue) => {
-      const newTodoItems = [...currValue, { todoName: itemName, todoDate: itemDueDate }];
-      return newTodoItems;
-    });
+    dispatch({ type: 'ADD', payload: { todoName: itemName, todoDate: itemDueDate } });
   }
 
   const handleDeleteItem = (index) => {
     console.log(`item deleted at index ${index}`);
-    let newTodoItems = todoItems.filter((item, i) => i !== index);
-    setTodoItems(newTodoItems);
+    dispatch({ type: 'DELETE', payload: index });
   }
 
   return (
@@ -33,9 +39,9 @@ function App() {
         <div className="BigContainer bg-red-800 text-white min-h-screen p-9">
           <center className="todo-container" >
             <AppName />
-            <AddTodo/>
+            <AddTodo />
             <WelcomeMessage />
-            <TodoItems/>
+            <TodoItems />
           </center>
         </div>
       </TodoItemsContext.Provider>
